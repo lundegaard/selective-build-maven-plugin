@@ -181,9 +181,8 @@ public class ChangesMojo extends AbstractMojo {
 
     private void printOutSelectiveBuildMavenParams(List<String> mavenOpts, List<String> changedModules) {
         System.out.print(String.join(" ", mavenOpts));
-        System.out.print(" -pl '");
+        System.out.print(" -pl ");
         System.out.print(String.join(",", changedModules));
-        System.out.print("'");
         System.out.println();
     }
 
