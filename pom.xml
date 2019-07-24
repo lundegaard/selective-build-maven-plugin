@@ -3,15 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>eu.lundegaard.maven</groupId>
-    <artifactId>lundegaard-maven-plugin</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <artifactId>selective-build-maven-plugin</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
-    <name>Lundegaard Maven Plugin (${project.packaging})</name>
+    <name>Selective Build Maven Plugin (${project.packaging})</name>
+    <description>
+        This plugin allows to build only submodules that contain changes. For bigger monorepo project this might speed
+        the build speed dramatically.
+    </description>
 
     <organization>
         <name>Lundegaard a.s.</name>
-        <url>http://www.lundegaard.eu</url>
+        <url>https://www.lundegaard.eu</url>
     </organization>
 
     <modules>
@@ -22,7 +26,7 @@
         <project.java.ver>1.8</project.java.ver>
 
         <!-- Framework versions -->
-        <lundegaard.commons.version>2.7.0</lundegaard.commons.version>
+        <lundegaard.build.tools.version>3.0.0-SNAPSHOT</lundegaard.build.tools.version>
 
         <!-- Plugin properties -->
         <license.plugin.year>2018</license.plugin.year>
@@ -66,6 +70,30 @@
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M2</version>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <failFast>true</failFast>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>[1.8.0,1.9.0)</version>
+                                </requireJavaVersion>
+                                <requireMavenVersion>
+                                    <version>[3.6.0,4.0.0)</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
@@ -75,6 +103,7 @@
                     <showWarnings>true</showWarnings>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>3.5.2</version>
@@ -94,7 +123,7 @@
                                 <artifactItem>
                                     <groupId>eu.lundegaard.commons</groupId>
                                     <artifactId>lundegaard-build-tools</artifactId>
-                                    <version>${lundegaard.commons.version}</version>
+                                    <version>${lundegaard.build.tools.version}</version>
                                     <type>jar</type>
                                     <outputDirectory>${project.build.directory}/generated-sources/module-info</outputDirectory>
                                 </artifactItem>
@@ -119,15 +148,17 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <header>licenses/lundegaard-proprietary.txt</header>
+                    <header>licenses/lundegaard-lgpl-notice.txt</header>
                     <failIfMissing>false</failIfMissing>
                     <strictCheck>true</strictCheck>
                     <encoding>UTF-8</encoding>
                     <includes>
+                        <include>src/main/groovy/**</include>
                         <include>src/main/java/**</include>
-                        <include>src/test/java/**</include>
+                        <include>src/main/kotlin/**</include>
                         <include>src/test/groovy/**</include>
-                        <!--  <include>src/main/webapp/WEB-INF/jsp/**</include> -->
+                        <include>src/test/java/**</include>
+                        <include>src/test/kotlin/**</include>
                     </includes>
                     <properties>
                         <year>${license.plugin.year}</year>
@@ -141,7 +172,7 @@
                     <dependency>
                         <groupId>eu.lundegaard.commons</groupId>
                         <artifactId>lundegaard-build-tools</artifactId>
-                        <version>${lundegaard.commons.version}</version>
+                        <version>${lundegaard.build.tools.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -195,7 +226,7 @@
                     <dependency>
                         <groupId>eu.lundegaard.commons</groupId>
                         <artifactId>lundegaard-build-tools</artifactId>
-                        <version>${lundegaard.commons.version}</version>
+                        <version>${lundegaard.build.tools.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
