@@ -1,10 +1,6 @@
-# Lundegaard Maven Plugin
+# Selective Build Maven Plugin
 
-This is home of lundegaard Maven plugin.
-
-## Goal `hello`
-
-This is just testing goal. It prints out the hello message (by default it is a quote from Dr. Sheldon Lee Cooper, B.S., M.S., M.A., Ph.D., Sc.D.)
+Selective Build Maven Plugin allows you to build and process only modules with changes in it. It is dependent on git client installed on your system.
 
 ## Goal `changes` 
 
@@ -29,8 +25,8 @@ To use this plugin first you should set it up in the root POM like this.
             <plugins>
                 <plugin>
                     <groupId>eu.lundegaard.maven</groupId>
-                    <artifactId>lundegaard-maven-plugin</artifactId>
-                    <version>0.1.0</version>
+                    <artifactId>selective-build-maven-plugin</artifactId>
+                    <version>0.2.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -51,7 +47,7 @@ The `changes` plugin outputs on _stdout_ parameters for the onward build. These 
 To obtain params one usually runs something like this:
 
 ```bash
-MVN_RUN_OPTS=$(mvn -q -N lundegaard:changes -Dsource=1234567890ABCDEF -Dtarget=FEDCBA0987654321)
+MVN_RUN_OPTS=$(mvn -q -N selective-build:changes -Dsource=1234567890ABCDEF -Dtarget=FEDCBA0987654321)
 ```
 
 The `source` and `target` properties are either commits or branches between which the changes are detected.
