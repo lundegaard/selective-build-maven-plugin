@@ -4,7 +4,7 @@
 
     <groupId>eu.lundegaard.maven</groupId>
     <artifactId>selective-build-maven-plugin</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <packaging>maven-plugin</packaging>
 
     <name>Selective Build Maven Plugin (${project.packaging})</name>
@@ -18,9 +18,6 @@
         <url>https://www.lundegaard.eu</url>
     </organization>
 
-    <modules>
-    </modules>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.java.ver>1.8</project.java.ver>
@@ -32,7 +29,6 @@
         <license.plugin.year>2018</license.plugin.year>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>commons-io</groupId>
@@ -42,32 +38,75 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.5.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-model</artifactId>
-            <version>3.5.4</version>
+            <version>3.6.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.4</version>
+            <version>3.6.0</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-utils</artifactId>
-            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
+            <version>1.7.26</version>
         </dependency>
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.7.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M3</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>3.6.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -87,6 +126,9 @@
                                 <requireMavenVersion>
                                     <version>[3.6.0,4.0.0)</version>
                                 </requireMavenVersion>
+                                <requireReleaseDeps/>
+                                <requireUpperBoundDeps/>
+                                <requirePluginVersions/>
                             </rules>
                         </configuration>
                     </execution>
@@ -95,7 +137,6 @@
 
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
                 <configuration>
                     <source>${project.java.ver}</source>
                     <target>${project.java.ver}</target>
@@ -106,11 +147,12 @@
 
             <plugin>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.5.2</version>
+                <version>3.6.0</version>
             </plugin>
 
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>module-info-properties</id>
@@ -131,13 +173,23 @@
                             <includes>**/module-info.properties</includes>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>analyze-dependencies</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>analyze-only</goal>
+                        </goals>
+                        <configuration>
+                            <failOnWarning>true</failOnWarning>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>2.11</version>
+                <version>3.0</version>
                 <executions>
                     <execution>
                         <id>first</id>
@@ -181,7 +233,7 @@
                 <!-- see https://github.com/ktoso/maven-git-commit-id-plugin -->
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
-                <version>2.1.10</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -207,7 +259,7 @@
             <plugin>
                 <groupId>net.revelc.code.formatter</groupId>
                 <artifactId>formatter-maven-plugin</artifactId>
-                <version>2.7.4</version>
+                <version>2.10.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -230,11 +282,43 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
         </plugins>
     </build>
 
     <profiles>
+        <profile>
+            <id>check-updates</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>versions-maven-plugin</artifactId>
+                        <version>2.7</version>
+                        <executions>
+                            <execution>
+                                <id>display-updates</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>display-plugin-updates</goal>
+                                    <goal>display-dependency-updates</goal>
+                                    <goal>display-property-updates</goal>
+                                </goals>
+                                <configuration>
+                                    <rulesUri>classpath:///maven-versions/rules.xml</rulesUri>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>eu.lundegaard.commons</groupId>
+                                <artifactId>lundegaard-build-tools</artifactId>
+                                <version>${lundegaard.build.tools.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>release</id>
             <build>
@@ -242,7 +326,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -255,7 +338,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -268,7 +350,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
