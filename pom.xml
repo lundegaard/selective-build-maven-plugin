@@ -23,7 +23,7 @@
         <project.java.ver>1.8</project.java.ver>
 
         <!-- Framework versions -->
-        <lundegaard.build.tools.version>3.0.0-SNAPSHOT</lundegaard.build.tools.version>
+        <lundegaard.build.support.version>1.0.0</lundegaard.build.support.version>
 
         <!-- Plugin properties -->
         <license.plugin.year>2018</license.plugin.year>
@@ -164,8 +164,8 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>eu.lundegaard.commons</groupId>
-                                    <artifactId>lundegaard-build-tools</artifactId>
-                                    <version>${lundegaard.build.tools.version}</version>
+                                    <artifactId>build-support</artifactId>
+                                    <version>${lundegaard.build.support.version}</version>
                                     <type>jar</type>
                                     <outputDirectory>${project.build.directory}/generated-sources/module-info</outputDirectory>
                                 </artifactItem>
@@ -223,8 +223,8 @@
                 <dependencies>
                     <dependency>
                         <groupId>eu.lundegaard.commons</groupId>
-                        <artifactId>lundegaard-build-tools</artifactId>
-                        <version>${lundegaard.build.tools.version}</version>
+                        <artifactId>build-support</artifactId>
+                        <version>${lundegaard.build.support.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -277,8 +277,8 @@
                 <dependencies>
                     <dependency>
                         <groupId>eu.lundegaard.commons</groupId>
-                        <artifactId>lundegaard-build-tools</artifactId>
-                        <version>${lundegaard.build.tools.version}</version>
+                        <artifactId>build-support</artifactId>
+                        <version>${lundegaard.build.support.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -311,8 +311,8 @@
                         <dependencies>
                             <dependency>
                                 <groupId>eu.lundegaard.commons</groupId>
-                                <artifactId>lundegaard-build-tools</artifactId>
-                                <version>${lundegaard.build.tools.version}</version>
+                                <artifactId>build-support</artifactId>
+                                <version>${lundegaard.build.support.version}</version>
                             </dependency>
                         </dependencies>
                     </plugin>
