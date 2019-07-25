@@ -26,7 +26,7 @@ To use this plugin first you should set it up in the root POM like this.
                 <plugin>
                     <groupId>eu.lundegaard.maven</groupId>
                     <artifactId>selective-build-maven-plugin</artifactId>
-                    <version>0.2.0</version>
+                    <version>0.5.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
