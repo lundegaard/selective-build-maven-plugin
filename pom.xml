@@ -287,6 +287,39 @@
 
     <profiles>
         <profile>
+            <id>check-updates</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>versions-maven-plugin</artifactId>
+                        <version>2.7</version>
+                        <executions>
+                            <execution>
+                                <id>display-updates</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>display-plugin-updates</goal>
+                                    <goal>display-dependency-updates</goal>
+                                    <goal>display-property-updates</goal>
+                                </goals>
+                                <configuration>
+                                    <rulesUri>classpath:///maven-versions/rules.xml</rulesUri>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>eu.lundegaard.commons</groupId>
+                                <artifactId>lundegaard-build-tools</artifactId>
+                                <version>${lundegaard.build.tools.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>release</id>
             <build>
                 <plugins>
