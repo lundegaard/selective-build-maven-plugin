@@ -4,7 +4,7 @@
 
     <groupId>eu.lundegaard.maven</groupId>
     <artifactId>selective-build-maven-plugin</artifactId>
-    <version>0.5.0</version>
+    <version>0.6.0</version>
     <packaging>maven-plugin</packaging>
 
     <name>Selective Build Maven Plugin (${project.packaging})</name>
@@ -23,10 +23,10 @@
         <project.java.ver>1.8</project.java.ver>
 
         <!-- Framework versions -->
-        <lundegaard.build.support.version>1.0.0</lundegaard.build.support.version>
+        <lundegaard.build.support.version>1.2.0</lundegaard.build.support.version>
 
         <!-- Plugin properties -->
-        <license.plugin.year>2018</license.plugin.year>
+        <license.plugin.year>2019</license.plugin.year>
     </properties>
 
     <dependencies>
@@ -375,46 +375,21 @@
         <url>https://jenkins.lnd.bz</url>
     </ciManagement>
 
-    <repositories>
-        <repository>
-            <id>lundegaard-nexus</id>
-            <name>Lundegaard Repository</name>
-            <url>https://nexus.lnd.bz/repository/maven-public/</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>lundegaard-nexus</id>
-            <name>Lundegaard Repository</name>
-            <url>https://nexus.lnd.bz/repository/maven-public/</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License 3.0</name>
+            <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+        </license>
+    </licenses>
 
     <distributionManagement>
         <repository>
-            <id>lundegaard-nexus-releases</id>
-            <name>Lundegaard repository</name>
-            <url>https://nexus.lnd.bz/repository/maven-releases/</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
         <snapshotRepository>
-            <id>lundegaard-nexus-snapshots</id>
-            <name>lundegaard repository</name>
-            <url>https://nexus.lnd.bz/repository/maven-snapshots/</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
