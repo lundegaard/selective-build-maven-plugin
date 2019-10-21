@@ -12,6 +12,7 @@
         This plugin allows to build only submodules that contain changes. For bigger monorepo project this might speed
         the build speed dramatically.
     </description>
+    <url>https://github.com/lundegaard/selective-build-maven-plugin</url>
 
     <organization>
         <name>Lundegaard a.s.</name>
