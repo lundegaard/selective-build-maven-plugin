@@ -360,6 +360,17 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -381,6 +392,24 @@
             <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
         </license>
     </licenses>
+
+    <inceptionYear>2018</inceptionYear>
+
+    <developers>
+        <developer>
+            <id>ales.rybak</id>
+            <name>Aleš Rybák</name>
+            <email>ales.rybak@lundegaard.eu</email>
+            <organization>Lundegaard a.s.</organization>
+            <organizationUrl>https://www.lundegaard.eu</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/lundegaard/selective-build-maven-plugin.git</connection>
+        <developerConnection>scm:git:ssh://github.com:lundegaard/selective-build-maven-plugin.git</developerConnection>
+        <url>https://github.com/lundegaard/selective-build-maven-plugin/tree/master</url>
+    </scm>
 
     <distributionManagement>
         <repository>
